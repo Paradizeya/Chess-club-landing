@@ -3,7 +3,7 @@
   scroll-behavior: smooth;
   font-size: clamp(12px, 2vh, 16px);
 
-  --runningLineHeight: clamp(2.375rem, 7vh, 3.75rem);
+  --runningLineHeight: clamp(38px, min(7vh, 3vw), 60px);
   --default: #1f1f1f;
   --primary: #fbce51;
   --secondary: #3057a2;
@@ -44,42 +44,12 @@
   bottom: 0;
 }
 .overlay {
-  background-image: url("./assets/overlay.png");
+  background-image: url("./assets/overlay-s.png");
   position: absolute;
   z-index: -10;
   mix-blend-mode: color-burn;
   height: 100%;
   width: 100%;
-}
-.runningLineWrapper {
-  position: relative;
-  overflow: hidden;
-  height: var(--runningLineHeight);
-
-  background: #f54932;
-  display: flex;
-  align-items: center;
-}
-.runningLine {
-  display: flex;
-  gap: 0.75rem;
-  color: #fff;
-  text-align: right;
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", serif;
-  font-size: clamp(1rem, 5vw, 1.375rem);
-  font-style: normal;
-  font-weight: 400;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.runningLine:nth-child(1) {
-  animation: runningLineAnimation1 60s linear infinite;
-  animation-delay: -60s;
-}
-.runningLine:nth-child(2) {
-  animation: runningLineAnimation2 60s linear infinite;
-  animation-delay: -30s;
 }
 /* Nav */
 .nav {
@@ -95,7 +65,7 @@
   align-items: center;
 }
 .navTitle {
-  padding-top: clamp(40px, 7.04vh, 150px);
+  padding-top: clamp(40px, 11vh, 135px);
   color: #060606;
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Merriweather", serif;
@@ -181,6 +151,36 @@ main {
   color: var(--default);
   border-radius: 4.125rem;
   border: 2px solid var(--default);
+}
+.runningLineWrapper {
+  position: relative;
+  overflow: hidden;
+  height: var(--runningLineHeight);
+
+  background: #f54932;
+  display: flex;
+  align-items: center;
+}
+.runningLine {
+  display: flex;
+  gap: 0.75rem;
+  color: #fff;
+  text-align: right;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", serif;
+  font-size: clamp(14px, min(5vh, 1.2vw), 3.375rem);
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.runningLine:nth-child(1) {
+  animation: runningLineAnimation1 60s linear infinite;
+  animation-delay: -60s;
+}
+.runningLine:nth-child(2) {
+  animation: runningLineAnimation2 60s linear infinite;
+  animation-delay: -30s;
 }
 /* ----------Media---------- */
 @media (width < 791px) {
