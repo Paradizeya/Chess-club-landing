@@ -183,6 +183,12 @@ main {
   animation-delay: -30s;
 }
 /* ----------Media---------- */
+@media (width < 388px) {
+  .navText {
+    text-align: start;
+    font-size: 17px;
+  }
+}
 @media (width < 791px) {
   .header {
     min-height: 812px;
@@ -198,8 +204,6 @@ main {
   }
   .navText {
     white-space: normal;
-    text-align: start;
-    font-size: 17px;
   }
   .background {
     top: auto;
