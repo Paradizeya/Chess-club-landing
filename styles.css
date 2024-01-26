@@ -1,12 +1,13 @@
 /* Basic*/
 :root {
   scroll-behavior: smooth;
-  font-size: clamp(12px, 2vh, 16px);
+  font-size: clamp(12px, min(2.3vh, 2vw), 16px);
 
   --runningLineHeight: clamp(38px, min(7vh, 3vw), 60px);
   --default: #1f1f1f;
   --primary: #fbce51;
   --secondary: #3057a2;
+  --accent: #f54932;
 
   color: #313131;
 }
@@ -15,12 +16,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  /* Smallest screen what doesn't break layout */
+  min-width: 345px;
+}
+
+.main {
+  padding: 6.68rem 0 8.75rem;
+}
+.sharedBodyPadding {
+  padding-right: 4.5rem;
+  padding-left: 4.5rem;
+}
+
 /* ----------Heder---------- */
 .header {
   position: relative;
-  height: calc(min(881px, 100dvh) - var(--runningLineHeight));
-  max-height: 881px;
-  min-height: 550px;
+  height: 100dvh;
+  max-height: calc(881px - var(--runningLineHeight));
+  min-height: 600px;
   overflow: hidden;
 }
 .header__bg {
@@ -54,8 +69,6 @@
   width: 100%;
 }
 /* ---Nav--- */
-/* .nav {
-} */
 .header__nav {
   /* Header specific style*/
   position: absolute;
@@ -70,21 +83,13 @@
   align-items: center;
 }
 .nav__title {
-  padding-top: clamp(40px, 11vh, 135px);
-  color: #060606;
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", serif;
-  font-size: clamp(36px, 8vw, 3.75rem);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%;
-  text-transform: uppercase;
+  padding-top: clamp(40px, 11vh, 90px);
 }
 .nav__text {
   color: #151515;
   text-align: center;
   font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -100,7 +105,84 @@
   flex-wrap: wrap;
   width: 100%;
 }
-/* -------------------- */
+
+/* ----------Support section---------- */
+.support {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow-x: hidden;
+}
+.support__title {
+  color: #313131;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(28px, 3vw, 37px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 135%;
+  text-transform: uppercase;
+}
+.support__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+.support__headerImg {
+  min-width: 335px;
+  max-width: 396px;
+  width: 40vw;
+}
+.support__body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 4.5rem 0 2.81rem;
+}
+.support__bodyImg {
+  max-width: 609px;
+  width: 40vw;
+}
+.support__bodyTable {
+  width: 100%;
+  text-align: left;
+
+  border-collapse: collapse;
+  border-style: hidden;
+
+  margin: 3.75rem 0 3rem 0;
+}
+.support__bodyTable th,
+.support__bodyTable td {
+  border: 2px solid #d0d0d0;
+  padding: 1rem 0;
+  line-height: 2;
+
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(20px, 4vw, 1.25rem);
+  font-style: normal;
+  line-height: 120%;
+}
+.support__bodyTable th {
+  font-weight: 400;
+  opacity: 0.7;
+}
+.support__bodyTable td {
+  font-weight: 600;
+  padding-left: 1rem;
+}
+
+/* ----------Vasyki---------- */
+.vasyki {
+  padding-top: 10rem;
+}
+
+/* ----------Tournament---------- */
+.tournament {
+}
+
 /* ----------Footer---------- */
 .footer {
   background: #e9ded4;
@@ -108,15 +190,34 @@
 }
 .footer__text {
   font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Golos Text", serif;
-  font-size: 1rem;
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(16px, 4vw, 1rem);
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 1.2rem */
   opacity: 0.6;
 }
-/* -------------------- */
+
 /* ----------Shared---------- */
+/* Titles */
+.titlePrimary {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(36px, 8vw, 3.75rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  text-transform: uppercase;
+}
+.titleSecondary {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(28px, 8vw, 3.375rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: uppercase;
+}
 /* ---Buttons--- */
 .btn {
   text-decoration: none;
@@ -124,7 +225,7 @@
   cursor: pointer;
 
   text-align: center;
-  font-family: "Golos Text", serif;
+  font-family: "Golos Text", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -154,13 +255,30 @@
   border-radius: 4.125rem;
   border: 2px solid var(--default);
 }
+/* ---Other--- */
+.accentTextPrimary {
+  color: var(--accent);
+}
+.accentTextSecondary {
+  color: var(--secondary);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(18px, 4vw, 1.25rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+.crossedText {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+}
 /* ---RunningLine--- */
 .runningLineWrapper {
   position: relative;
   overflow: hidden;
   height: var(--runningLineHeight);
 
-  background: #f54932;
+  background: var(--accent);
   display: flex;
   align-items: center;
 }
@@ -170,7 +288,7 @@
   color: #fff;
   text-align: right;
   font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", serif;
+  font-family: "Merriweather", sans-serif;
   font-size: clamp(14px, min(5vh, 1.2vw), 3.375rem);
   font-style: normal;
   font-weight: 400;
@@ -185,6 +303,7 @@
   animation: runningLineAnimation2 60s linear infinite;
   animation-delay: -30s;
 }
+
 /* ----------Media---------- */
 /* Don't apply hover on touchscreen */
 @media (hover: hover) {
@@ -204,21 +323,16 @@
   }
 }
 /* Natural breakpoint for layout shifts */
-@media (width < 791px) {
+@media (width < 867px) {
+  .main {
+    padding: clamp(48px, 5vh, 6.68rem) 0 clamp(120px, 8vh, 8.75rem);
+  }
+  .sharedBodyPadding {
+    padding-right: clamp(20px, 5vw, 4.5rem);
+    padding-left: clamp(20px, 5vw, 4.5rem);
+  }
   .header {
     min-height: 812px;
-  }
-  .header__nav {
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 100%;
-    padding: 0 20px;
-  }
-  .nav__title {
-    padding-top: 40px;
-  }
-  .nav__text {
-    white-space: normal;
   }
   .header__background {
     top: auto;
@@ -235,17 +349,76 @@
     min-height: 246.813px;
     transform: translate(calc(-66%), 0);
   }
-  .footer {
-    padding: 2.5rem clamp(1.25rem, 10vw, 4.5rem) 3.75rem;
+  .header__nav {
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    padding: 0 20px;
+  }
+  .nav__title {
+    padding-top: 40px;
+  }
+  .nav__text {
+    white-space: normal;
   }
   .nav__buttons {
     flex-direction: column;
     align-items: stretch;
   }
+  .support {
+    gap: 2.15rem;
+  }
+  .support__title {
+    width: 100%;
+  }
+  .support__header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .support__body {
+    padding: 0;
+    flex-direction: column;
+    gap: 0;
+  }
+  .support__bodyContent {
+    padding: 0 clamp(20px, 5vw, 4.5rem);
+  }
+  .support__headerImg {
+    max-width: 450px;
+    width: 52vw;
+  }
+  .support__bodyImg {
+    min-width: 374px;
+    width: 68vw;
+    margin-bottom: 1.19rem;
+  }
+  .support__bodyTable th,
+  .support__bodyTable td {
+    border: none;
+  }
+  .support__bodyTable tr {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .support__bodyTable tr:not(:last-child) {
+    border-bottom: 2px solid #d0d0d0;
+  }
+  .vasyki {
+    padding-top: 7.5rem;
+  }
+  .footer {
+    padding: 2.5rem clamp(1.25rem, 10vw, 4.5rem) 3.75rem;
+  }
   .btn {
     white-space: nowrap;
   }
   .hiddenWhenSmall {
+    display: none;
+  }
+}
+@media (width > 866px) {
+  .hiddenWhenBig {
     display: none;
   }
 }
@@ -263,6 +436,9 @@
     text-align: start;
     font-size: 17px;
   }
+  .support__bodyTable tr {
+    text-align: left;
+  }
 }
 @media (width > 1366px) {
   .header__nav {
@@ -274,8 +450,15 @@
   .nav__text {
     font-weight: 500;
   }
+  .titlePrimary {
+    color: #060606;
+  }
+  :root {
+    --default: #060606;
+  }
 }
-/* Animations */
+
+/* ----------Animations---------- */
 @keyframes runningLineAnimation1 {
   0% {
     transform: translateX(100%);
