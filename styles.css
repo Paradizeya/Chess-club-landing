@@ -53,11 +53,11 @@
   height: 100%;
   width: 100%;
 }
-/* Nav */
+/* ---Nav--- */
 /* .nav {
 } */
-/* Header specific style*/
 .header__nav {
+  /* Header specific style*/
   position: absolute;
   top: 1.62rem;
   left: 72px;
@@ -101,11 +101,6 @@
   width: 100%;
 }
 /* -------------------- */
-
-main {
-  min-height: 200dvh;
-}
-
 /* ----------Footer---------- */
 .footer {
   background: #e9ded4;
@@ -122,6 +117,7 @@ main {
 }
 /* -------------------- */
 /* ----------Shared---------- */
+/* ---Buttons--- */
 .btn {
   text-decoration: none;
   color: inherit;
@@ -158,6 +154,7 @@ main {
   border-radius: 4.125rem;
   border: 2px solid var(--default);
 }
+/* ---RunningLine--- */
 .runningLineWrapper {
   position: relative;
   overflow: hidden;
@@ -189,6 +186,7 @@ main {
   animation-delay: -30s;
 }
 /* ----------Media---------- */
+/* Don't apply hover on touchscreen */
 @media (hover: hover) {
   .btn:hover {
     box-shadow: 0px 4px 4px rgba(48, 48, 48, 0.5);
@@ -203,12 +201,6 @@ main {
     background: var(--default);
     border: 2px solid var(--default);
     opacity: 1;
-  }
-}
-@media (width < 388px) {
-  .nav__text {
-    text-align: start;
-    font-size: 17px;
   }
 }
 /* Natural breakpoint for layout shifts */
@@ -263,6 +255,13 @@ main {
     opacity: 0.9;
     background: #fff;
     border: 2px solid #fff;
+  }
+}
+/* All queries below are design specific */
+@media (width < 388px) {
+  .nav__text {
+    text-align: start;
+    font-size: 17px;
   }
 }
 @media (width > 1366px) {
