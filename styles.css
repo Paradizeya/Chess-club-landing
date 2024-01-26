@@ -110,6 +110,7 @@ body {
 .support {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4rem;
   overflow-x: hidden;
 }
