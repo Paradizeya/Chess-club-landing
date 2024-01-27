@@ -286,7 +286,12 @@ body {
 .vasyki {
   padding-top: 10rem;
 }
-
+.vasyki__title {
+  display: inline;
+}
+.vasyki__titleSub {
+  display: inline-block;
+}
 /* ----------Tournament---------- */
 .tournament {
 }
