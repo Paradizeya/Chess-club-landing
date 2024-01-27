@@ -578,7 +578,8 @@ body {
     background: none;
   }
   .vasyki__carousel {
-    width: 335px;
+    min-width: 335px;
+    width: 55vw;
   }
   .vasyki__carouselElem {
     padding-top: 80px;
