@@ -1,4 +1,4 @@
-/* Basic*/
+/* Basic */
 :root {
   scroll-behavior: smooth;
   font-size: clamp(12px, min(2.3vh, 2vw), 16px);
@@ -25,6 +25,113 @@ body {
 .main {
   padding: 6.68rem 0 8.75rem;
 }
+
+/* ----------Shared---------- */
+/* Titles */
+.titlePrimary {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(36px, 8vw, 3.75rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  text-transform: uppercase;
+}
+.titleSecondary {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(28px, 8vw, 3.375rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+/* ---Buttons--- */
+.btn {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+
+  text-align: center;
+  font-family: "Golos Text", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+.btnPrimary {
+  display: flex;
+  padding: 1.25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  color: #fff;
+  border-radius: 4.125rem;
+  background: var(--default);
+  border: 2px solid var(--default);
+}
+.btnSecondary {
+  display: flex;
+  padding: 1.25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  color: var(--default);
+  border-radius: 4.125rem;
+  border: 2px solid var(--default);
+}
+/* ---RunningLine--- */
+.runningLineWrapper {
+  position: relative;
+  overflow: hidden;
+  height: var(--runningLineHeight);
+
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+}
+.runningLine {
+  display: flex;
+  gap: 0.75rem;
+  color: #fff;
+  text-align: right;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Merriweather", sans-serif;
+  font-size: clamp(14px, min(5vh, 1.2vw), 3.375rem);
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.runningLine:nth-child(1) {
+  animation: runningLineAnimation1 60s linear infinite;
+  animation-delay: -60s;
+}
+.runningLine:nth-child(2) {
+  animation: runningLineAnimation2 60s linear infinite;
+  animation-delay: -30s;
+}
+/* ---Text Decorations--- */
+.accentTextPrimary {
+  color: var(--accent);
+}
+.accentTextSecondary {
+  color: var(--secondary);
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Golos Text", sans-serif;
+  font-size: clamp(18px, 4vw, 1.25rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+.crossedText {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+}
+/* ---Other--- */
 .sharedBodyPadding {
   padding-right: 4.5rem;
   padding-left: 4.5rem;
@@ -197,112 +304,6 @@ body {
   font-weight: 400;
   line-height: 120%; /* 1.2rem */
   opacity: 0.6;
-}
-
-/* ----------Shared---------- */
-/* Titles */
-.titlePrimary {
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", sans-serif;
-  font-size: clamp(36px, 8vw, 3.75rem);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 110%;
-  text-transform: uppercase;
-}
-.titleSecondary {
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", sans-serif;
-  font-size: clamp(28px, 8vw, 3.375rem);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 120%;
-  text-transform: uppercase;
-}
-/* ---Buttons--- */
-.btn {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-
-  text-align: center;
-  font-family: "Golos Text", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-
-  transition: 0.2s;
-}
-.btnPrimary {
-  display: flex;
-  padding: 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 0;
-  color: #fff;
-  border-radius: 4.125rem;
-  background: var(--default);
-  border: 2px solid var(--default);
-}
-.btnSecondary {
-  display: flex;
-  padding: 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 0;
-  color: var(--default);
-  border-radius: 4.125rem;
-  border: 2px solid var(--default);
-}
-/* ---Other--- */
-.accentTextPrimary {
-  color: var(--accent);
-}
-.accentTextSecondary {
-  color: var(--secondary);
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Golos Text", sans-serif;
-  font-size: clamp(18px, 4vw, 1.25rem);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 120%;
-}
-.crossedText {
-  text-decoration: line-through;
-  text-decoration-color: var(--accent);
-}
-/* ---RunningLine--- */
-.runningLineWrapper {
-  position: relative;
-  overflow: hidden;
-  height: var(--runningLineHeight);
-
-  background: var(--accent);
-  display: flex;
-  align-items: center;
-}
-.runningLine {
-  display: flex;
-  gap: 0.75rem;
-  color: #fff;
-  text-align: right;
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", sans-serif;
-  font-size: clamp(14px, min(5vh, 1.2vw), 3.375rem);
-  font-style: normal;
-  font-weight: 400;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.runningLine:nth-child(1) {
-  animation: runningLineAnimation1 60s linear infinite;
-  animation-delay: -60s;
-}
-.runningLine:nth-child(2) {
-  animation: runningLineAnimation2 60s linear infinite;
-  animation-delay: -30s;
 }
 
 /* ----------Media---------- */
