@@ -10,12 +10,12 @@ const createCarousel = (count) => {
     wrapper.classList.add("vasyki__carouselElem");
     //Get all items with the same carousel index
     const items = document.querySelectorAll(
-      `.vasyki__stage[data-carousel="${i}"]`
+      `.vasyki__stage[data-carousel-index="${i}"]`
     );
     //Insert wrapper before first of the found carousel items
     items[0].parentNode.insertBefore(wrapper, items[0]);
     //Add corresponding dataset value to the wrapper for carousel indexing
-    wrapper.dataset.index = i;
+    wrapper.dataset.carouselElementIndex = i;
     //Append wrapper with found items
     wrapper.append(...items);
   }
