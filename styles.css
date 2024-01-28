@@ -19,15 +19,44 @@
 }
 
 body {
-  /* Smallest screen what doesn't break layout */
-  min-width: 345px;
+  min-width: 375px;
 }
 
-.main {
-  padding: 6.68rem 0 8.75rem;
-  display: grid;
-  place-items: center;
+/* ::-webkit-scrollbar {
+  width: 12px;
 }
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 20px;
+  transition: 0.2s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: maroon;
+} */
+
+.vasyki__carousel,
+.tournament__carousel {
+  padding-bottom: 10px;
+}
+.vasyki__carousel::-webkit-scrollbar,
+.tournament__carousel::-webkit-scrollbar {
+  height: 5px;
+}
+.vasyki__carousel::-webkit-scrollbar-track,
+.tournament__carousel::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 20px;
+}
+.vasyki__carousel::-webkit-scrollbar-thumb,
+.tournament__carousel::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9;
+  border-radius: 20px;
+}
+
 .footer {
   padding: 2.5rem 4.5rem 4.5rem;
   display: grid;
@@ -433,9 +462,11 @@ body {
 }
 .tournament__header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .tournament__body {
-  padding-top: 3.75rem;
+  padding: 3.75rem 0 8.75rem;
   display: grid;
   place-items: center;
 }
@@ -443,7 +474,6 @@ body {
   display: grid;
   justify-items: center;
   gap: 1.25rem;
-  padding-bottom: 10px;
 }
 .tournament__playerImg {
   min-width: 244px;
@@ -478,16 +508,40 @@ body {
 }
 .tournament__carouselWrapper {
   max-width: 1222px;
+  min-width: 375px;
   width: 90vw;
 }
+.tournament__carouselNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tournament__carouselPage::before,
+.tournament__carouselPage::after {
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: "Golos Text", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+.tournament__carouselPage::before {
+  content: "3";
+}
+.tournament__carouselPage::after {
+  content: "/6";
+  opacity: 0.6;
+}
 .tournament__carousel {
-  overflow-x: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: min(calc(100% / 3), 394px);
   gap: 20px;
-}
-.tournament__carouselElem {
 }
 /* ----------Footer---------- */
 .footer {
@@ -638,7 +692,7 @@ body {
     padding-bottom: 7.5rem;
   }
   .tournament__body {
-    padding-top: 2.5rem;
+    padding: 2.5rem 0 6.25rem;
   }
 }
 @media (width > 866px) {
@@ -659,6 +713,11 @@ body {
   /* Reset grid specific styles */
   .vasyki__stages {
     display: block;
+    /* Style if carousel is unbailable */
+    padding-top: 2vh;
+  }
+  .vasyki__stage {
+    margin: 1rem 0;
   }
   .vasyki__stage:last-child .vasyki__stageText {
     padding-right: 0px;
@@ -674,11 +733,8 @@ body {
     left: 50%;
     transform: translate(-50%, 0);
   }
-  .vasyki__stage::after {
-    display: none;
-  }
   /* Carousel */
-  .vasyki__stage {
+  .vasyki__carousel .vasyki__stage {
     padding: 0 1.5rem 1.75rem;
     background: none;
   }
@@ -689,6 +745,12 @@ body {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+
+    /* Reset of stages styles if carousel is available */
+    padding-top: 0px;
+  }
+  .vasyki__carousel .vasyki__stage::after {
+    display: none;
   }
   .vasyki__carouselNav {
     display: flex;
@@ -714,14 +776,31 @@ body {
   }
 }
 /* Natural  breakpoints of tournament carousel */
-@media (width < 1220px) {
+@media (min-width: 1220px) {
+  .tournament__carouselElem:nth-child(3n + 1) {
+    scroll-snap-align: start;
+  }
+}
+@media (width < 1220px) and (width > 720px) {
   .tournament__carousel {
     grid-auto-columns: calc(100% / 2);
+  }
+  .tournament__carouselElem:nth-child(2n + 1) {
+    scroll-snap-align: start;
+  }
+  .tournament__carouselPage::before {
+    content: "2";
   }
 }
 @media (width < 720px) {
   .tournament__carousel {
     grid-auto-columns: 100%;
+  }
+  .tournament__carouselElem {
+    scroll-snap-align: start;
+  }
+  .tournament__carouselPage::before {
+    content: "1";
   }
 }
 /* All queries below are design specific */
