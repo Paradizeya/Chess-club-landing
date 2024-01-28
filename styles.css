@@ -57,8 +57,16 @@ body {
 /* ---Buttons--- */
 .btn {
   text-decoration: none;
+  background: none;
+  border: none;
   color: inherit;
   cursor: pointer;
+
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
 
   text-align: center;
   font-family: "Golos Text", sans-serif;
@@ -68,32 +76,47 @@ body {
 
   transition: 0.2s;
 }
-.btnPrimary {
-  display: flex;
+.btn[disabled] {
+  cursor: default;
+}
+.btnDefault {
   padding: 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 0;
   color: #fff;
   border-radius: 4.125rem;
   background: var(--default);
   border: 2px solid var(--default);
 }
-.btnSecondary {
-  display: flex;
+.btnPrimary {
   padding: 1.25rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   flex: 1 0 0;
   color: var(--default);
   border-radius: 4.125rem;
   border: 2px solid var(--default);
 }
-.btnForward {
+.btnSecondary {
+  padding: 0.75rem;
+  flex: 1 0 0;
+  color: var(--secondary);
+  border-radius: 3.875rem;
+  border: 1px solid var(--secondary);
 }
+.btnForward,
 .btnBack {
+  flex: 0;
+}
+.btnForward svg,
+.btnBack svg {
+  fill: currentColor;
+  width: 44px;
+  height: 44px;
+}
+.btnForward[disabled],
+.btnBack[disabled] {
+  color: #d6d6d6;
+}
+.btnForward svg,
+.btnBack svg {
+  transition: 100ms;
 }
 /* ---RunningLine--- */
 .runningLineWrapper {
@@ -423,34 +446,61 @@ body {
 }
 
 /* ----------Media---------- */
-/* Don't apply hover on touchscreen */
+/* Don't apply hover on touchscreen and disabled (if svg) buttons */
 @media (hover: hover) {
-  .btn:hover {
-    box-shadow: 0px 4px 4px rgba(48, 48, 48, 0.5);
+  :root {
+    --btnShadow: 0px 4px 4px rgba(48, 48, 48, 0.384);
   }
-  .btnPrimary:hover {
+  .btnDefault:hover {
     color: var(--default);
     background: var(--primary);
     border: 2px solid var(--primary);
+    box-shadow: var(--btnShadow);
+    transform: translateY(-5px);
   }
-  .btnSecondary:hover {
+  .btnPrimary:hover {
     color: #fff;
     background: var(--default);
     border: 2px solid var(--default);
     opacity: 1;
+    box-shadow: var(--btnShadow);
+    transform: translateY(-5px);
+  }
+  .btnSecondary:hover {
+    color: #fff;
+    background: var(--secondary);
+    border: 1px solid var(--secondary);
+    box-shadow: var(--btnShadow);
+    transform: translateY(-5px);
+  }
+  .btnBack:hover:not([disabled]),
+  .btnForward:hover:not([disabled]) {
+    color: var(--primary);
   }
 }
 /* Natural breakpoint for layout shifts */
 @media (width < 867px) {
+  .btn {
+    white-space: nowrap;
+  }
+  .btnForward svg,
+  .btnBack svg {
+    fill: currentColor;
+    width: 36px;
+    height: 36px;
+  }
+  .hiddenWhenSmall {
+    display: none;
+  }
+  .sharedBodyPadding {
+    padding-right: clamp(20px, 5vw, 4.5rem);
+    padding-left: clamp(20px, 5vw, 4.5rem);
+  }
   .main {
     padding: clamp(48px, 5vh, 6.68rem) 0 clamp(120px, 8vh, 8.75rem);
   }
   .footer {
     padding: 2.5rem clamp(1.25rem, 10vw, 4.5rem) 3.75rem;
-  }
-  .sharedBodyPadding {
-    padding-right: clamp(20px, 5vw, 4.5rem);
-    padding-left: clamp(20px, 5vw, 4.5rem);
   }
   .header {
     min-height: 812px;
@@ -529,21 +579,15 @@ body {
     padding-top: 7.5rem;
     padding-bottom: 7.5rem;
   }
-  .btn {
-    white-space: nowrap;
-  }
-  .hiddenWhenSmall {
-    display: none;
-  }
 }
 @media (width > 866px) {
   .hiddenWhenBig {
     display: none;
   }
 }
-/* Natural breakpoint to change btnSecondary in header */
+/* Natural breakpoint to change btnPrimary in header */
 @media (width < 1176px) {
-  .btnSecondary {
+  .btnPrimary {
     opacity: 0.9;
     background: #fff;
     border: 2px solid #fff;
@@ -580,6 +624,11 @@ body {
   .vasyki__carousel {
     min-width: 335px;
     width: 55vw;
+  }
+  .vasyki__carouselNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .vasyki__carouselElem {
     padding-top: 80px;
