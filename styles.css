@@ -449,7 +449,7 @@ body {
 /* Don't apply hover on touchscreen and disabled (if svg) buttons */
 @media (hover: hover) {
   :root {
-    --btnShadow: 0px 4px 4px rgba(48, 48, 48, 0.384);
+    --btnShadow: 0px 5px 8px rgba(0, 0, 0, 0.233);
   }
   .btnDefault:hover {
     color: var(--default);
