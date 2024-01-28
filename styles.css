@@ -430,25 +430,25 @@ body {
 /* ----------Tournament---------- */
 .tournament {
   width: 100%;
-  overflow-x: hidden;
 }
 .tournament__header {
   display: flex;
 }
 .tournament__body {
-  overflow-x: scroll;
   padding-top: 3.75rem;
+  display: grid;
+  place-items: center;
 }
 .tournament__player {
   display: grid;
   justify-items: center;
-  padding: 0 2.31rem;
   gap: 1.25rem;
+  padding-bottom: 10px;
 }
 .tournament__playerImg {
   min-width: 244px;
   max-width: 320px;
-  width: 25vw;
+  width: 23.5vw;
 }
 .tournament__playerInfo {
   display: flex;
@@ -456,6 +456,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  text-align: center;
 }
 .tournament__playerTitle {
   color: #313131;
@@ -475,8 +476,15 @@ body {
   font-weight: 400;
   line-height: 120%;
 }
+.tournament__carouselWrapper {
+  max-width: 1222px;
+  width: 90vw;
+}
 .tournament__carousel {
-  display: flex;
+  overflow-x: hidden;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(calc(100% / 3), 394px);
   gap: 20px;
 }
 .tournament__carouselElem {
@@ -499,7 +507,7 @@ body {
 /* Don't apply hover on touchscreen and disabled (if svg) buttons */
 @media (hover: hover) {
   :root {
-    --btnShadow: 0px 5px 8px rgba(0, 0, 0, 0.233);
+    --btnShadow: 0px 5px 8px 5px rgba(0, 0, 0, 0.233);
   }
   .btnDefault:hover {
     color: var(--default);
@@ -629,6 +637,9 @@ body {
     padding-top: 7.5rem;
     padding-bottom: 7.5rem;
   }
+  .tournament__body {
+    padding-top: 2.5rem;
+  }
 }
 @media (width > 866px) {
   .hiddenWhenBig {
@@ -674,6 +685,10 @@ body {
   .vasyki__carousel {
     min-width: 335px;
     width: 55vw;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
   .vasyki__carouselNav {
     display: flex;
@@ -685,6 +700,8 @@ body {
     background-color: var(--bg-color);
     padding-bottom: calc(2.13rem - 1.75rem);
     position: relative;
+    flex: 1 0 100%;
+    scroll-snap-align: start;
   }
   .vasyki__carouselElem::after {
     content: "";
@@ -694,6 +711,17 @@ body {
     height: 100%;
     background: url("./assets/card-bg.png");
     mix-blend-mode: color-burn;
+  }
+}
+/* Natural  breakpoints of tournament carousel */
+@media (width < 1220px) {
+  .tournament__carousel {
+    grid-auto-columns: calc(100% / 2);
+  }
+}
+@media (width < 720px) {
+  .tournament__carousel {
+    grid-auto-columns: 100%;
   }
 }
 /* All queries below are design specific */
