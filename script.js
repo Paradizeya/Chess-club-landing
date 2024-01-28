@@ -1,7 +1,3 @@
-const carouselBreakpoint = 1028;
-const carouselItemsAmount = 5;
-let carouselExists = false;
-
 const btnBack = `<button class="btn btnBack">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
     <circle cx="22" cy="22" r="22" transform="rotate(-180 22 22)" fill="currentColor"/>
@@ -27,18 +23,31 @@ const btnForward = `<button class="btn btnForward">
     </svg>
 </button>`;
 
-const vasykiCarousel = document.querySelector(".vasyki__carousel");
-const vasykiCarouselNav = `<div class="vasyki__carouselNav">${btnBack}${btnForward}</div>`;
+const vasykiCarouselBreakpoint = 1028;
+const vasykiCarouselItemsAmount = 5;
+let vasykiCarouselExists = false;
+const vasykiCarouselWrapper = document.querySelector(
+  ".vasyki__carouselWrapper"
+);
+const vasykiCarouselNav = `<div class="vasyki__carouselNav">${btnBack}<div></div>${btnForward}</div>`;
 
-const createCarousel = (count) => {
+const tournamentHeader = document.querySelector(".tournament__header");
+
+const createCarousel = (
+  count,
+  itemsToWrap,
+  sharedDataSet,
+  whereToPutNavigation,
+  navigation
+) => {
   for (let i = 1; i <= count; i++) {
     //Create a new wrapper
     const wrapper = document.createElement("div");
     //Add class to the wrapper
-    wrapper.classList.add("vasyki__carouselElem");
+    wrapper.classList.add(itemsToWrap);
     //Get all items with the same carousel index
     const items = document.querySelectorAll(
-      `.vasyki__stage[data-carousel-index="${i}"]`
+      `.vasyki__stage[${sharedDataSet}="${i}"]`
     );
     //Insert wrapper before first of the found carousel items
     items[0].parentNode.insertBefore(wrapper, items[0]);
@@ -48,34 +57,58 @@ const createCarousel = (count) => {
     wrapper.append(...items);
   }
   //Add carousel navigation
-  vasykiCarousel.insertAdjacentHTML("beforeend", vasykiCarouselNav);
-  carouselExists = true;
+  whereToPutNavigation.insertAdjacentHTML("beforeend", navigation);
 };
 
-const removeCarousel = () => {
-  const items = document.querySelectorAll(".vasyki__carouselElem");
+const removeCarousel = (itemsToReplace, whereNavigation) => {
+  const items = document.querySelectorAll(itemsToReplace);
   items.forEach((item) => {
     item.replaceWith(...item.childNodes);
   });
   //Remove carousel navigation
-  vasykiCarousel.removeChild(vasykiCarousel.lastChild);
-  carouselExists = false;
+  whereNavigation.removeChild(whereNavigation.lastChild);
 };
 
 function resizeFn() {
   //Breakpoint reached?
-  if (window.innerWidth < carouselBreakpoint) {
+  if (window.innerWidth < vasykiCarouselBreakpoint) {
     //Carousel does not exists?
-    if (!carouselExists) {
-      createCarousel(carouselItemsAmount);
+    if (!vasykiCarouselExists) {
+      createCarousel(
+        vasykiCarouselItemsAmount,
+        "vasyki__carouselElem",
+        "data-carousel-index",
+        vasykiCarouselWrapper,
+        vasykiCarouselNav
+      );
+      vasykiCarouselExists = true;
     }
   } else {
-    //If width is greater then Breakpoint, check if carousel exists to not run removal function without a reason
-    if (carouselExists) {
-      removeCarousel();
+    // Check if carousel exists to not run removal function without a reason
+    if (vasykiCarouselExists) {
+      removeCarousel(".vasyki__carouselElem", vasykiCarouselWrapper);
+      vasykiCarouselExists = false;
     }
   }
 }
 
+// ---------------------
+
+//   .vasyki__carousel .tournament__carousel
+//If JS is enabled, remove auto overflow on carousels
+const vasykiCarousel = document.querySelector(".vasyki__stages");
+//add .vasyki__carousel
+vasykiCarousel.classList.add("vasyki__carousel");
+const tournamentCarousel = document.querySelector(".tournament__carousel");
+vasykiCarousel.style.overflowX = "hidden";
+tournamentCarousel.style.overflowX = "hidden";
+
 window.onresize = resizeFn;
 resizeFn();
+
+// Adding nav buttons to tournament section
+const tournamentNavs = document.querySelectorAll(".tournament__carouselNav");
+tournamentNavs.forEach((nav) => {
+  nav.insertAdjacentHTML("afterbegin", btnBack);
+  nav.insertAdjacentHTML("beforeend", btnForward);
+});
