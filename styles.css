@@ -351,6 +351,9 @@ body {
   padding-top: 10rem;
   padding-bottom: 12.5rem;
 }
+.vasyki__carouselNav {
+  display: none;
+}
 .vasyki__title {
   display: inline;
 }
@@ -526,9 +529,6 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 120%;
-}
-.tournament__carouselPage::before {
-  content: "3";
 }
 .tournament__carouselPage::after {
   content: "/6";
@@ -776,12 +776,18 @@ body {
   }
 }
 /* Natural  breakpoints of tournament carousel */
-@media (min-width: 1220px) {
-  .tournament__carouselElem:nth-child(3n + 1) {
+@media (max-width: 720px) {
+  .tournament__carousel {
+    grid-auto-columns: 100%;
+  }
+  .tournament__carouselElem {
     scroll-snap-align: start;
   }
+  .tournament__carouselPage::before {
+    content: "1";
+  }
 }
-@media (width < 1220px) and (width > 720px) {
+@media (width > 720px) and (max-width: 1220px) {
   .tournament__carousel {
     grid-auto-columns: calc(100% / 2);
   }
@@ -792,15 +798,12 @@ body {
     content: "2";
   }
 }
-@media (width < 720px) {
-  .tournament__carousel {
-    grid-auto-columns: 100%;
-  }
-  .tournament__carouselElem {
+@media (width > 1220px) {
+  .tournament__carouselElem:nth-child(3n + 1) {
     scroll-snap-align: start;
   }
   .tournament__carouselPage::before {
-    content: "1";
+    content: "3";
   }
 }
 /* All queries below are design specific */
