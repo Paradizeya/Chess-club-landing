@@ -30,11 +30,6 @@ tournamentCarouselNav.forEach((nav) => {
   tournamentBtnForward.targetCarousel = tournamentCarousel;
   tournamentBtnForward.carouselElem = tournamentCarousel;
 
-  console.log("--- foreach loop ---");
-  console.log(tournamentCarousel);
-  console.log(tournamentBtnBack);
-  console.log(tournamentBtnForward);
-  console.log("---------");
   tournamentBtnBack.addEventListener("click", scrollToPrevItem);
   tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
