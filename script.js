@@ -23,24 +23,27 @@ const vasykiBtnForward = vasykiCarouselNav.querySelector(".btnForward");
 
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
-const tournamentCarouselNav = document.querySelectorAll(
-  ".tournament__carouselNav"
-);
-tournamentCarouselNav.forEach((nav) => {
-  const tournamentBtnBack = nav.querySelector(".btnBack");
-  const tournamentBtnForward = nav.querySelector(".btnForward");
+document.addEventListener("DOMContentLoaded", function () {
+  const tournamentCarouselNav = document.querySelectorAll(
+    ".tournament__carouselNav"
+  );
+  tournamentCarouselNav.forEach((nav) => {
+    const tournamentBtnBack = nav.querySelector(".btnBack");
+    const tournamentBtnForward = nav.querySelector(".btnForward");
 
-  tournamentBtnBack.targetCarousel = tournamentCarousel;
-  tournamentBtnBack.carouselElem = tournamentCarousel;
-  tournamentBtnForward.targetCarousel = tournamentCarousel;
-  tournamentBtnForward.carouselElem = tournamentCarousel;
+    tournamentBtnBack.targetCarousel = tournamentCarousel;
+    tournamentBtnBack.carouselElem = tournamentCarousel;
+    tournamentBtnForward.targetCarousel = tournamentCarousel;
+    tournamentBtnForward.carouselElem = tournamentCarousel;
 
-  tournamentBtnBack.addEventListener("click", scrollToPrevItem);
-  tournamentBtnForward.addEventListener("click", scrollToNextItem);
+    tournamentBtnBack.addEventListener("click", scrollToPrevItem);
+    tournamentBtnForward.addEventListener("click", scrollToNextItem);
+  });
+
+  resizeFn();
 });
 
 window.onresize = resizeFn;
-resizeFn();
 
 function resizeFn() {
   // ---Vasyki Part
@@ -108,8 +111,6 @@ function unGroupItems(itemsToReplace) {
 function scrollToPrevItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
-  console.log(whatToScroll);
-  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: -itemWidth,
     top: 0,
@@ -119,8 +120,6 @@ function scrollToPrevItem(e) {
 function scrollToNextItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
-  console.log(whatToScroll);
-  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: itemWidth,
     top: 0,
