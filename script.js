@@ -1,11 +1,6 @@
-//If JS is enabled, remove auto overflow on carousels
 const vasykiCarousel = document.querySelector(".vasyki__stages");
 vasykiCarousel.classList.add("vasyki__carousel");
-
 const tournamentCarousel = document.querySelector(".tournament__carousel");
-
-vasykiCarousel.style.overflowX = "hidden";
-tournamentCarousel.style.overflowX = "hidden";
 
 //For grouping vasykiCarousel items in carousel elems
 const vasykiCarouselBreakpoint = 1028;
@@ -23,27 +18,29 @@ const vasykiBtnForward = vasykiCarouselNav.querySelector(".btnForward");
 
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
-document.addEventListener("DOMContentLoaded", function () {
-  const tournamentCarouselNav = document.querySelectorAll(
-    ".tournament__carouselNav"
-  );
-  tournamentCarouselNav.forEach((nav) => {
-    const tournamentBtnBack = nav.querySelector(".btnBack");
-    const tournamentBtnForward = nav.querySelector(".btnForward");
+const tournamentCarouselNav = document.querySelectorAll(
+  ".tournament__carouselNav"
+);
+tournamentCarouselNav.forEach((nav) => {
+  const tournamentBtnBack = nav.querySelector(".btnBack");
+  const tournamentBtnForward = nav.querySelector(".btnForward");
 
-    tournamentBtnBack.targetCarousel = tournamentCarousel;
-    tournamentBtnBack.carouselElem = tournamentCarousel;
-    tournamentBtnForward.targetCarousel = tournamentCarousel;
-    tournamentBtnForward.carouselElem = tournamentCarousel;
+  tournamentBtnBack.targetCarousel = tournamentCarousel;
+  tournamentBtnBack.carouselElem = tournamentCarousel;
+  tournamentBtnForward.targetCarousel = tournamentCarousel;
+  tournamentBtnForward.carouselElem = tournamentCarousel;
 
-    tournamentBtnBack.addEventListener("click", scrollToPrevItem);
-    tournamentBtnForward.addEventListener("click", scrollToNextItem);
-  });
-
-  resizeFn();
+  console.log("--- foreach loop ---");
+  console.log(tournamentCarousel);
+  console.log(tournamentBtnBack);
+  console.log(tournamentBtnForward);
+  console.log("---------");
+  tournamentBtnBack.addEventListener("click", scrollToPrevItem);
+  tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
 
 window.onresize = resizeFn;
+resizeFn();
 
 function resizeFn() {
   // ---Vasyki Part
@@ -79,7 +76,6 @@ function resizeFn() {
       vasykiBtnForward.removeEventListener("click", scrollToNextItem);
     }
   }
-  // ---Tournament part 720 | 1220
 }
 
 function groupItems(count, itemsToWrap, sharedDataSet) {

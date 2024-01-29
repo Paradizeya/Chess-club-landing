@@ -535,7 +535,7 @@ body {
   opacity: 0.6;
 }
 .tournament__carousel {
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   display: grid;
@@ -742,7 +742,7 @@ body {
     min-width: 335px;
     width: 55vw;
     display: flex;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 
