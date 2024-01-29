@@ -21,9 +21,6 @@ const vasykiCarouselNav = document.querySelector(".vasyki__carouselNav");
 const vasykiBtnBack = vasykiCarouselNav.querySelector(".btnBack");
 const vasykiBtnForward = vasykiCarouselNav.querySelector(".btnForward");
 
-window.onresize = resizeFn;
-resizeFn();
-
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
 const tournamentCarouselNav = document.querySelectorAll(
@@ -41,6 +38,9 @@ tournamentCarouselNav.forEach((nav) => {
   tournamentBtnBack.addEventListener("click", scrollToPrevItem);
   tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
+
+window.onresize = resizeFn;
+resizeFn();
 
 function resizeFn() {
   // ---Vasyki Part
@@ -108,6 +108,8 @@ function unGroupItems(itemsToReplace) {
 function scrollToPrevItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
+  console.log(whatToScroll);
+  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: -itemWidth,
     top: 0,
@@ -117,6 +119,8 @@ function scrollToPrevItem(e) {
 function scrollToNextItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
+  console.log(whatToScroll);
+  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: itemWidth,
     top: 0,
