@@ -108,7 +108,6 @@ function unGroupItems(itemsToReplace) {
 function scrollToPrevItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
-  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: -itemWidth,
     top: 0,
@@ -118,17 +117,6 @@ function scrollToPrevItem(e) {
 function scrollToNextItem(e) {
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
-  console.log(itemWidth);
-  whatToScroll.scrollBy({
-    left: itemWidth,
-    top: 0,
-    behavior: "smooth",
-  });
-}
-function scrollToNextItem(e) {
-  const whatToScroll = e.currentTarget.targetCarousel;
-  const itemWidth = e.currentTarget.carouselElem.clientWidth;
-  console.log(itemWidth);
   whatToScroll.scrollBy({
     left: itemWidth,
     top: 0,
