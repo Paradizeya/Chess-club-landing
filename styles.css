@@ -524,8 +524,8 @@ body {
   gap: 1rem;
 }
 
-.tournament__carouselPage::before,
-.tournament__carouselPage::after {
+.tournament__carouselPageCurrent,
+.tournament__carouselPageMax {
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Golos Text", sans-serif;
   font-size: 1rem;
@@ -533,7 +533,7 @@ body {
   font-weight: 400;
   line-height: 120%;
 }
-.tournament__carouselPage::after {
+.tournament__carouselPageMax {
   content: "/6";
   opacity: 0.6;
 }
@@ -801,9 +801,6 @@ body {
   .tournament__carouselElem {
     scroll-snap-align: start;
   }
-  .tournament__carouselPage::before {
-    content: "1";
-  }
 }
 @media (width > 720px) and (max-width: 1220px) {
   .tournament__carousel {
@@ -812,16 +809,10 @@ body {
   .tournament__carouselElem:nth-child(2n + 1) {
     scroll-snap-align: start;
   }
-  .tournament__carouselPage::before {
-    content: "2";
-  }
 }
 @media (width > 1220px) {
   .tournament__carouselElem:nth-child(3n + 1) {
     scroll-snap-align: start;
-  }
-  .tournament__carouselPage::before {
-    content: "3";
   }
 }
 /* All queries below are design specific */
