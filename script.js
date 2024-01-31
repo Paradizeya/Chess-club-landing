@@ -56,12 +56,13 @@ const vasykiObserver = new IntersectionObserver(
     root: vasykiCarousel,
   }
 );
-
-window.onresize = resizeFn;
-resizeFn();
 //
 //--------------------
 //
+let intervalId;
+const tournamentCarouselBreakpointMedium = 1221;
+const tournamentCarouselBreakpointSmall = 721;
+const tournamentCarouselItemsAmount = 6;
 const tournamentCarousel = document.querySelector(".tournament__carousel");
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
@@ -89,21 +90,21 @@ const tournamentObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       const index = Number(entry.target.dataset.carouselElementIndex);
       if (entry.isIntersecting) {
-        console.log(index);
         entry.target.dataset.visible = true;
       } else {
         entry.target.dataset.visible = false;
       }
     });
-
     //Find max visible elem for page number in nav
     let page = 1;
-    tournamentCarouselElems.forEach((elem) => {
-      if (elem.dataset.visible === "true") {
-        let index = elem.dataset.carouselElementIndex;
-        page = page >= index ? page : index;
-      }
-    });
+    tournamentCarousel
+      .querySelectorAll(".tournament__carouselElem")
+      .forEach((elem) => {
+        if (elem.dataset.visible === "true") {
+          let index = elem.dataset.carouselElementIndex;
+          page = page >= index ? page : index;
+        }
+      });
     tournamentCarouselNav.forEach((nav) => {
       nav.querySelector(".tournament__carouselPageCurrent").innerHTML = page;
     });
@@ -112,9 +113,74 @@ const tournamentObserver = new IntersectionObserver(
     root: tournamentCarousel,
   }
 );
+
+//adding copies for loop
+const tournamentCarouselElemsArray = [];
 tournamentCarouselElems.forEach((elem) => {
-  tournamentObserver.observe(elem);
+  tournamentCarouselElemsArray.push(elem.cloneNode(true));
 });
+tournamentCarouselElemsArray
+  .slice(
+    tournamentCarouselElemsArray.length / 2,
+    tournamentCarouselElemsArray.length
+  )
+  .reverse()
+  .forEach((elem) => {
+    tournamentCarousel.prepend(elem);
+  });
+tournamentCarouselElemsArray
+  .slice(0, tournamentCarouselElemsArray.length / 2)
+  .forEach((elem) => {
+    tournamentCarousel.append(elem);
+  });
+//Scroll to first elem if it's not on the screen
+tournamentCarousel
+  .querySelector(".tournament__carouselElem[data-carousel-element-index='1']")
+  .scrollIntoView();
+//Setting observer
+tournamentCarousel
+  .querySelectorAll(".tournament__carouselElem")
+  .forEach((elem) => {
+    tournamentObserver.observe(elem);
+  });
+
+tournamentCarousel.addEventListener("scroll", function () {
+  let ItemsOnScreen = 3;
+  if (window.innerWidth < tournamentCarouselBreakpointMedium) ItemsOnScreen = 2;
+  if (window.innerWidth < tournamentCarouselBreakpointSmall) ItemsOnScreen = 1;
+
+  if (tournamentCarousel.scrollLeft === 0) {
+    stopInterval();
+    tournamentCarousel.style.scrollBehavior = "auto";
+    tournamentCarousel.scrollLeft =
+      tournamentCarousel.clientWidth *
+      (tournamentCarouselItemsAmount / ItemsOnScreen);
+    tournamentCarousel.style.scrollBehavior = "smooth";
+    startInterval();
+  } else if (
+    Math.ceil(
+      tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth + 41
+    ) >= Math.ceil(tournamentCarousel.scrollWidth)
+  ) {
+    stopInterval();
+    tournamentCarousel.style.scrollBehavior = "auto";
+    tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth;
+    tournamentCarousel.style.scrollBehavior = "smooth";
+    startInterval();
+  }
+});
+
+window.onresize = resizeFn;
+resizeFn();
+startInterval();
+tournamentCarousel.addEventListener("mouseenter", function () {
+  stopInterval();
+});
+
+tournamentCarousel.addEventListener("mouseleave", function () {
+  startInterval();
+});
+
 //
 //
 // ------------ Functions
@@ -157,6 +223,30 @@ function resizeFn() {
       vasykiObserver.disconnect();
     }
   }
+  // --Tournament part
+  tournamentCarouselResize();
+}
+
+function tournamentCarouselResize() {
+  const first = tournamentCarousel.firstElementChild;
+  const last = tournamentCarousel.lastElementChild;
+  const second = first.nextElementSibling;
+  const prelast = last.previousElementSibling;
+  if (window.innerWidth < tournamentCarouselBreakpointMedium) {
+    first.style.display = "none";
+    last.style.display = "none";
+    second.style.display = "grid";
+    prelast.style.display = "grid";
+    if (window.innerWidth < tournamentCarouselBreakpointSmall) {
+      second.style.display = "none";
+      prelast.style.display = "none";
+    }
+  } else {
+    first.style.display = "grid";
+    last.style.display = "grid";
+    second.style.display = "grid";
+    prelast.style.display = "grid";
+  }
 }
 
 function groupItems(count, itemsToWrap, sharedDataSet) {
@@ -186,6 +276,7 @@ function unGroupItems(itemsToReplace) {
 }
 
 function scrollToPrevItem(e) {
+  stopInterval();
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
   whatToScroll.scrollBy({
@@ -193,8 +284,10 @@ function scrollToPrevItem(e) {
     top: 0,
     behavior: "smooth",
   });
+  startInterval();
 }
 function scrollToNextItem(e) {
+  stopInterval();
   const whatToScroll = e.currentTarget.targetCarousel;
   const itemWidth = e.currentTarget.carouselElem.clientWidth;
   whatToScroll.scrollBy({
@@ -202,4 +295,19 @@ function scrollToNextItem(e) {
     top: 0,
     behavior: "smooth",
   });
+  startInterval();
+}
+
+function startInterval() {
+  intervalId = setInterval(() => {
+    tournamentCarousel.scrollBy({
+      left: tournamentCarousel.clientWidth,
+      top: 0,
+      behavior: "smooth",
+    });
+  }, 4000);
+}
+
+function stopInterval() {
+  clearInterval(intervalId);
 }

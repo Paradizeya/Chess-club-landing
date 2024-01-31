@@ -806,7 +806,7 @@ body {
   .tournament__carousel {
     grid-auto-columns: calc(100% / 2);
   }
-  .tournament__carouselElem:nth-child(2n + 1) {
+  .tournament__carouselElem:nth-child(2n + 2) {
     scroll-snap-align: start;
   }
 }
