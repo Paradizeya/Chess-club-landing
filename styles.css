@@ -515,7 +515,6 @@ body {
 .tournament__carouselWrapper {
   max-width: 1222px;
   min-width: 375px;
-  width: 90vw;
 }
 .tournament__carouselNav {
   display: flex;
@@ -538,7 +537,7 @@ body {
   opacity: 0.6;
 }
 .tournament__carousel {
-  overflow-x: hidden;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   display: grid;

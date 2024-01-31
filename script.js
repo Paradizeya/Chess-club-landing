@@ -158,9 +158,8 @@ tournamentCarousel.addEventListener("scroll", function () {
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   } else if (
-    Math.ceil(
-      tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth + 41
-    ) >= Math.ceil(tournamentCarousel.scrollWidth)
+    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth >=
+    tournamentCarousel.scrollWidth
   ) {
     stopInterval();
     tournamentCarousel.style.scrollBehavior = "auto";
