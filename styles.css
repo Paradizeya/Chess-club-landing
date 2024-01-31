@@ -139,13 +139,13 @@ body {
   width: 44px;
   height: 44px;
 }
-.btnForward[disabled],
-.btnBack[disabled] {
-  color: #d6d6d6;
-}
 .btnForward:active,
 .btnBack:active {
   color: var(--primary);
+}
+.btnForward[disabled],
+.btnBack[disabled] {
+  color: #d6d6d6;
 }
 .btnForward svg,
 .btnBack svg {
