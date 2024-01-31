@@ -1,6 +1,5 @@
 const vasykiCarousel = document.querySelector(".vasyki__stages");
 vasykiCarousel.classList.add("vasyki__carousel");
-const tournamentCarousel = document.querySelector(".tournament__carousel");
 
 //For grouping vasykiCarousel items in carousel elems
 const vasykiCarouselBreakpoint = 1028;
@@ -16,6 +15,55 @@ const vasykiCarouselNav = document.querySelector(".vasyki__carouselNav");
 const vasykiBtnBack = vasykiCarouselNav.querySelector(".btnBack");
 const vasykiBtnForward = vasykiCarouselNav.querySelector(".btnForward");
 
+//Pages in nav
+const vasykiPages = vasykiCarouselNav.querySelectorAll(
+  ".vasyki__carouselPageDot"
+);
+
+//Observer for vasykiCarousel
+const vasykiObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        //Setting page
+        vasykiPages.forEach((page) => {
+          if (page.dataset.page == entry.target.dataset.carouselElementIndex)
+            page.classList.add("vasyki__carouselPageDot--active");
+          else page.classList.remove("vasyki__carouselPageDot--active");
+        });
+
+        //Enabling|disabling buttons
+        //If this is first elem
+        if (entry.target.dataset.carouselElementIndex == 1) {
+          vasykiBtnBack.disabled = true;
+          vasykiBtnForward.disabled = false;
+        }
+        //If this is last elem
+        else if (
+          entry.target.dataset.carouselElementIndex == vasykiCarouselItemsAmount
+        ) {
+          vasykiBtnBack.disabled = false;
+          vasykiBtnForward.disabled = true;
+        }
+        //If this is in between elem
+        else {
+          vasykiBtnBack.disabled = false;
+          vasykiBtnForward.disabled = false;
+        }
+      }
+    });
+  },
+  {
+    root: vasykiCarousel,
+  }
+);
+
+window.onresize = resizeFn;
+resizeFn();
+//
+//--------------------
+//
+const tournamentCarousel = document.querySelector(".tournament__carousel");
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
 const tournamentCarouselNav = document.querySelectorAll(
@@ -33,10 +81,11 @@ tournamentCarouselNav.forEach((nav) => {
   tournamentBtnBack.addEventListener("click", scrollToPrevItem);
   tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
+//Observer for tournamentCarousel
 
-window.onresize = resizeFn;
-resizeFn();
-
+//
+//
+// ------------ Functions
 function resizeFn() {
   // ---Vasyki Part
   //Breakpoint reached?
@@ -48,27 +97,30 @@ function resizeFn() {
         "vasyki__carouselElem",
         "data-carousel-index"
       );
+
       vasykiCarouselExists = true;
 
-      //Adding buttons event listeners
-      const vasykiCarouselElem = vasykiCarousel.querySelector(
-        ".vasyki__carouselElem"
-      );
-
       vasykiBtnBack.targetCarousel = vasykiCarousel;
-      vasykiBtnBack.carouselElem = vasykiCarouselElem;
+      vasykiBtnBack.carouselElem = vasykiCarousel;
       vasykiBtnForward.targetCarousel = vasykiCarousel;
-      vasykiBtnForward.carouselElem = vasykiCarouselElem;
+      vasykiBtnForward.carouselElem = vasykiCarousel;
       vasykiBtnBack.addEventListener("click", scrollToPrevItem);
       vasykiBtnForward.addEventListener("click", scrollToNextItem);
+      //Adding observer to created elements
+      document.querySelectorAll(".vasyki__carouselElem").forEach((elem) => {
+        vasykiObserver.observe(elem);
+      });
     }
   } else {
     // Check if carousel exists to not run removal function without a reason
     if (vasykiCarouselExists) {
       unGroupItems(".vasyki__carouselElem");
+
       vasykiCarouselExists = false;
+
       vasykiBtnBack.removeEventListener("click", scrollToPrevItem);
       vasykiBtnForward.removeEventListener("click", scrollToNextItem);
+      vasykiObserver.disconnect();
     }
   }
 }

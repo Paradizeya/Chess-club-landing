@@ -200,7 +200,6 @@ body {
   padding-right: 4.5rem;
   padding-left: 4.5rem;
 }
-
 /* ----------Heder---------- */
 .header {
   position: relative;
@@ -756,6 +755,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 16px;
+  }
+  .vasyki__carouselPage {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .vasyki__carouselPageDot {
+    width: 10px;
+    height: 10px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+  }
+  .vasyki__carouselPageDot--active {
+    background-color: #151515;
   }
   .vasyki__carouselElem {
     padding-top: 80px;
