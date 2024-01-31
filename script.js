@@ -24,24 +24,23 @@ const vasykiPages = vasykiCarouselNav.querySelectorAll(
 const vasykiObserver = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
+      const index = Number(entry.target.dataset.carouselElementIndex);
       if (entry.isIntersecting) {
         //Setting page
         vasykiPages.forEach((page) => {
-          if (page.dataset.page == entry.target.dataset.carouselElementIndex)
+          if (page.dataset.page == index)
             page.classList.add("vasyki__carouselPageDot--active");
           else page.classList.remove("vasyki__carouselPageDot--active");
         });
 
         //Enabling|disabling buttons
         //If this is first elem
-        if (entry.target.dataset.carouselElementIndex == 1) {
+        if (index === 1) {
           vasykiBtnBack.disabled = true;
           vasykiBtnForward.disabled = false;
         }
         //If this is last elem
-        else if (
-          entry.target.dataset.carouselElementIndex == vasykiCarouselItemsAmount
-        ) {
+        else if (index === vasykiCarouselItemsAmount) {
           vasykiBtnBack.disabled = false;
           vasykiBtnForward.disabled = true;
         }
@@ -82,7 +81,40 @@ tournamentCarouselNav.forEach((nav) => {
   tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
 //Observer for tournamentCarousel
+const tournamentCarouselElems = tournamentCarousel.querySelectorAll(
+  ".tournament__carouselElem"
+);
+const tournamentObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      const index = Number(entry.target.dataset.carouselElementIndex);
+      if (entry.isIntersecting) {
+        console.log(index);
+        entry.target.dataset.visible = true;
+      } else {
+        entry.target.dataset.visible = false;
+      }
+    });
 
+    //Find max visible elem for page number in nav
+    let page = 1;
+    tournamentCarouselElems.forEach((elem) => {
+      if (elem.dataset.visible === "true") {
+        let index = elem.dataset.carouselElementIndex;
+        page = page >= index ? page : index;
+      }
+    });
+    tournamentCarouselNav.forEach((nav) => {
+      nav.querySelector(".tournament__carouselPageCurrent").innerHTML = page;
+    });
+  },
+  {
+    root: tournamentCarousel,
+  }
+);
+tournamentCarouselElems.forEach((elem) => {
+  tournamentObserver.observe(elem);
+});
 //
 //
 // ------------ Functions
@@ -107,9 +139,11 @@ function resizeFn() {
       vasykiBtnBack.addEventListener("click", scrollToPrevItem);
       vasykiBtnForward.addEventListener("click", scrollToNextItem);
       //Adding observer to created elements
-      document.querySelectorAll(".vasyki__carouselElem").forEach((elem) => {
-        vasykiObserver.observe(elem);
-      });
+      vasykiCarousel
+        .querySelectorAll(".vasyki__carouselElem")
+        .forEach((elem) => {
+          vasykiObserver.observe(elem);
+        });
     }
   } else {
     // Check if carousel exists to not run removal function without a reason
