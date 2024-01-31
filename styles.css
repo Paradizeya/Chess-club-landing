@@ -515,6 +515,7 @@ body {
 .tournament__carouselWrapper {
   max-width: 1222px;
   min-width: 375px;
+  width: 90vw;
 }
 .tournament__carouselNav {
   display: flex;

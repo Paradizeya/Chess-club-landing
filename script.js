@@ -64,6 +64,7 @@ const tournamentCarouselBreakpointMedium = 1221;
 const tournamentCarouselBreakpointSmall = 721;
 const tournamentCarouselItemsAmount = 6;
 const tournamentCarousel = document.querySelector(".tournament__carousel");
+
 // Getting buttons for tournamentCarousel (multiple navs!)
 // Setting event listeners for all navs buttons
 const tournamentCarouselNav = document.querySelectorAll(
@@ -81,6 +82,7 @@ tournamentCarouselNav.forEach((nav) => {
   tournamentBtnBack.addEventListener("click", scrollToPrevItem);
   tournamentBtnForward.addEventListener("click", scrollToNextItem);
 });
+
 //Observer for tournamentCarousel
 const tournamentCarouselElems = tournamentCarousel.querySelectorAll(
   ".tournament__carouselElem"
@@ -115,28 +117,33 @@ const tournamentObserver = new IntersectionObserver(
 );
 
 //adding copies for loop
-const tournamentCarouselElemsArray = [];
-tournamentCarouselElems.forEach((elem) => {
-  tournamentCarouselElemsArray.push(elem.cloneNode(true));
-});
-tournamentCarouselElemsArray
-  .slice(
-    tournamentCarouselElemsArray.length / 2,
-    tournamentCarouselElemsArray.length
-  )
-  .reverse()
-  .forEach((elem) => {
-    tournamentCarousel.prepend(elem);
+const addCopiesForLoop = () => {
+  const tournamentCarouselElemsArray = [];
+  tournamentCarouselElems.forEach((elem) => {
+    tournamentCarouselElemsArray.push(elem.cloneNode(true));
   });
-tournamentCarouselElemsArray
-  .slice(0, tournamentCarouselElemsArray.length / 2)
-  .forEach((elem) => {
-    tournamentCarousel.append(elem);
-  });
-//Scroll to first elem if it's not on the screen
-tournamentCarousel
-  .querySelector(".tournament__carouselElem[data-carousel-element-index='1']")
-  .scrollIntoView();
+  tournamentCarouselElemsArray
+    .slice(
+      tournamentCarouselElemsArray.length / 2,
+      tournamentCarouselElemsArray.length
+    )
+    .reverse()
+    .forEach((elem) => {
+      tournamentCarousel.prepend(elem);
+    });
+  tournamentCarouselElemsArray
+    .slice(0, tournamentCarouselElemsArray.length / 2)
+    .forEach((elem) => {
+      tournamentCarousel.append(elem);
+    });
+
+  tournamentCarousel
+    .querySelector(".tournament__carouselElem[data-carousel-element-index='1']")
+    .scrollIntoView();
+};
+
+addCopiesForLoop();
+
 //Setting observer
 tournamentCarousel
   .querySelectorAll(".tournament__carouselElem")
@@ -145,6 +152,7 @@ tournamentCarousel
   });
 
 tournamentCarousel.addEventListener("scroll", function () {
+  //1357
   let ItemsOnScreen = 3;
   if (window.innerWidth < tournamentCarouselBreakpointMedium) ItemsOnScreen = 2;
   if (window.innerWidth < tournamentCarouselBreakpointSmall) ItemsOnScreen = 1;
@@ -158,7 +166,7 @@ tournamentCarousel.addEventListener("scroll", function () {
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   } else if (
-    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth >=
+    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth + 41 >=
     tournamentCarousel.scrollWidth
   ) {
     stopInterval();
