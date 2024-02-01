@@ -136,10 +136,6 @@ const addCopiesForLoop = () => {
     .forEach((elem) => {
       tournamentCarousel.append(elem);
     });
-
-  tournamentCarousel
-    .querySelector(".tournament__carouselElem[data-carousel-element-index='1']")
-    .scrollIntoView();
 };
 
 addCopiesForLoop();
