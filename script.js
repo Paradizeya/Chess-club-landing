@@ -165,8 +165,9 @@ tournamentCarousel.addEventListener("scroll", function () {
     tournamentCarousel.scrollWidth
   ) {
     stopInterval();
+    alert("end");
     tournamentCarousel.style.scrollBehavior = "auto";
-    tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth;
+    tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth + 1;
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   }
