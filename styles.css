@@ -477,6 +477,8 @@ body {
   padding-top: 3.75rem;
   display: grid;
   place-items: center;
+  width: fit-content;
+  margin: 0 auto;
 }
 .tournament__player {
   display: grid;
@@ -517,7 +519,7 @@ body {
 .tournament__carouselWrapper {
   max-width: 1222px;
   min-width: 375px;
-  width: 90vw;
+  width: 100%;
 }
 .tournament__carouselNav {
   display: flex;
@@ -545,7 +547,7 @@ body {
   scroll-behavior: smooth;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: min(calc(100% / 3), 394px);
+  grid-auto-columns: min(calc((100% - 20px) / 3), 394px);
   gap: 20px;
 }
 /* ----------Footer---------- */
@@ -698,6 +700,9 @@ body {
   .tournament__body {
     padding-top: 2.5rem;
   }
+  .tournament__carouselNav {
+    padding-top: 40px;
+  }
 }
 @media (width > 866px) {
   .hiddenWhenBig {
@@ -805,7 +810,7 @@ body {
 }
 @media (width > 720px) and (max-width: 1220px) {
   .tournament__carousel {
-    grid-auto-columns: calc(100% / 2);
+    grid-auto-columns: calc((100% - 20px) / 2);
   }
   .tournament__carouselElem:nth-child(2n + 2) {
     scroll-snap-align: start;

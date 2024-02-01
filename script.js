@@ -152,7 +152,6 @@ tournamentCarousel
   });
 
 tournamentCarousel.addEventListener("scroll", function () {
-  //1357
   let ItemsOnScreen = 3;
   if (window.innerWidth < tournamentCarouselBreakpointMedium) ItemsOnScreen = 2;
   if (window.innerWidth < tournamentCarouselBreakpointSmall) ItemsOnScreen = 1;
@@ -166,7 +165,7 @@ tournamentCarousel.addEventListener("scroll", function () {
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   } else if (
-    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth + 41 >=
+    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth >=
     tournamentCarousel.scrollWidth
   ) {
     stopInterval();
