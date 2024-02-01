@@ -208,7 +208,7 @@ body {
 .header {
   position: relative;
   height: 100vh;
-  max-height: calc(881px - var(--runningLineHeight));
+  max-height: 700px;
   min-height: 600px;
   overflow: hidden;
 }
