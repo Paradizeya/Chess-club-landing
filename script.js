@@ -161,13 +161,14 @@ tournamentCarousel.addEventListener("scroll", function () {
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   } else if (
-    tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth >=
-    tournamentCarousel.scrollWidth
+    Math.ceil(
+      tournamentCarousel.scrollLeft + tournamentCarousel.clientWidth
+    ) === Math.ceil(tournamentCarousel.scrollWidth)
   ) {
     stopInterval();
     alert("end");
     tournamentCarousel.style.scrollBehavior = "auto";
-    tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth + 1;
+    tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth;
     tournamentCarousel.style.scrollBehavior = "smooth";
     startInterval();
   }
