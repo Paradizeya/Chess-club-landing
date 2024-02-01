@@ -54,7 +54,10 @@
         </nav>
         <div class="header__bg">
           <img src="assets/sun.png" class="header__background" />
-          <img src="assets/city.png" class="header__foreground" />
+          <picture>
+            <source media="(max-width: 500px)" srcset="assets/city-s.png" />
+            <img src="assets/city.png" class="header__foreground" />
+          </picture>
           <div class="header__overlay"></div>
         </div>
       </header>
