@@ -111,6 +111,7 @@ body {
   cursor: default;
 }
 .btnDefault {
+  height: 72px;
   padding: 1.25rem;
   color: #fff;
   border-radius: 4.125rem;
@@ -118,6 +119,7 @@ body {
   border: 2px solid var(--default);
 }
 .btnPrimary {
+  height: 72px;
   padding: 1.25rem;
   flex: 1 0 0;
   color: var(--default);
@@ -259,7 +261,7 @@ body {
   align-items: center;
 }
 .nav__title {
-  padding-top: clamp(40px, 11vh, 90px);
+  padding-top: clamp(40px, 11vh, 62px);
 }
 .nav__text {
   color: #151515;
