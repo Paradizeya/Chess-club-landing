@@ -166,7 +166,6 @@ tournamentCarousel.addEventListener("scroll", function () {
     ) === Math.ceil(tournamentCarousel.scrollWidth)
   ) {
     stopInterval();
-    alert("end");
     tournamentCarousel.style.scrollBehavior = "auto";
     tournamentCarousel.scrollLeft = tournamentCarousel.clientWidth;
     tournamentCarousel.style.scrollBehavior = "smooth";
