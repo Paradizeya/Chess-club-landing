@@ -22,6 +22,12 @@ body {
   min-width: 375px;
 }
 
+.main {
+  padding: 80px 0 140px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 /* ::-webkit-scrollbar {
   width: 12px;
 }
@@ -38,10 +44,6 @@ body {
   background-color: maroon;
 } */
 
-.vasyki__carousel,
-.tournament__carousel {
-  padding-bottom: 10px;
-}
 .vasyki__carousel::-webkit-scrollbar,
 .tournament__carousel::-webkit-scrollbar {
   height: 5px;
@@ -472,7 +474,7 @@ body {
   justify-content: space-between;
 }
 .tournament__body {
-  padding: 3.75rem 0 8.75rem;
+  padding-top: 3.75rem;
   display: grid;
   place-items: center;
 }
@@ -564,7 +566,7 @@ body {
 /* Don't apply hover on touchscreen and disabled (if svg) buttons */
 @media (hover: hover) {
   :root {
-    --btnShadow: 0px 5px 8px 5px rgba(0, 0, 0, 0.233);
+    --btnShadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.103);
   }
   .btnDefault:hover {
     color: var(--default);
@@ -585,7 +587,6 @@ body {
     color: #fff;
     background: var(--secondary);
     border: 1px solid var(--secondary);
-    box-shadow: var(--btnShadow);
     transform: translateY(-5px);
   }
   .btnBack:hover:not([disabled]),
@@ -595,6 +596,9 @@ body {
 }
 /* Natural breakpoint for layout shifts */
 @media (width < 867px) {
+  .main {
+    padding: 48px 0 100px;
+  }
   .btn {
     white-space: nowrap;
   }
@@ -610,9 +614,6 @@ body {
   .sharedBodyPadding {
     padding-right: clamp(20px, 5vw, 4.5rem);
     padding-left: clamp(20px, 5vw, 4.5rem);
-  }
-  .main {
-    padding: clamp(48px, 5vh, 6.68rem) 0 clamp(120px, 8vh, 8.75rem);
   }
   .footer {
     padding: 2.5rem clamp(1.25rem, 10vw, 4.5rem) 3.75rem;
@@ -695,7 +696,7 @@ body {
     padding-bottom: 7.5rem;
   }
   .tournament__body {
-    padding: 2.5rem 0 6.25rem;
+    padding-top: 2.5rem;
   }
 }
 @media (width > 866px) {
