@@ -60,9 +60,11 @@ body {
 
 /* ----------Shared---------- */
 /* Titles */
-.titlePrimary {
+.title {
   font-variant-numeric: lining-nums proportional-nums;
   font-family: "Merriweather", sans-serif;
+}
+.titlePrimary {
   font-size: clamp(36px, 8vw, 3.75rem);
   font-style: normal;
   font-weight: 400;
@@ -70,8 +72,6 @@ body {
   text-transform: uppercase;
 }
 .titleSecondary {
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", sans-serif;
   font-size: clamp(28px, 8vw, 3.375rem);
   font-style: normal;
   font-weight: 400;
@@ -351,8 +351,6 @@ body {
 }
 .support__title {
   color: #313131;
-  font-variant-numeric: lining-nums proportional-nums;
-  font-family: "Merriweather", sans-serif;
   font-size: clamp(28px, 3vw, 37px);
   font-style: normal;
   font-weight: 400;
@@ -529,42 +527,28 @@ body {
     "six seven seven seven seven";
 }
 .vasyki__stage[data-index="1"] {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
   grid-area: one;
 }
 .vasyki__stage[data-index="2"] {
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
   -ms-grid-column-span: 3;
   grid-area: two;
 }
 .vasyki__stage[data-index="3"] {
-  -ms-grid-row: 1;
   -ms-grid-row-span: 3;
-  -ms-grid-column: 7;
   -ms-grid-column-span: 3;
   grid-area: three;
 }
 .vasyki__stage[data-index="4"] {
-  -ms-grid-row: 3;
-  -ms-grid-column: 1;
   grid-area: four;
 }
 .vasyki__stage[data-index="5"] {
-  -ms-grid-row: 3;
-  -ms-grid-column: 3;
   -ms-grid-column-span: 3;
   grid-area: five;
 }
 .vasyki__stage[data-index="6"] {
-  -ms-grid-row: 5;
-  -ms-grid-column: 1;
   grid-area: six;
 }
 .vasyki__stage[data-index="7"] {
-  -ms-grid-row: 5;
-  -ms-grid-column: 3;
   -ms-grid-column-span: 7;
   grid-area: seven;
 }
